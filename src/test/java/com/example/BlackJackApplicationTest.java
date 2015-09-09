@@ -10,7 +10,8 @@ import java.io.PrintStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class BlackJackApplicationTest
@@ -60,7 +61,7 @@ public class BlackJackApplicationTest
 
         BlackJackApplication.main( new String[]{} );
 
-        verify( applicationMock ).run( any( Card.class ) );
+        verify( applicationMock ).run();
     }
 
     @Test
@@ -69,14 +70,13 @@ public class BlackJackApplicationTest
     {
         application = new BlackJackApplication( "Test" );
 
-        application.run( new Card( 10, CardType.A ) );
+        application.run();
 
         assertThat( getConsoleText() ).contains( "Test" );
     }
 
     private String getConsoleText()
     {
-        Reworked some tests
         return outContent.toString().trim();
     }
 

@@ -27,7 +27,8 @@ public class BlackJackApplication
 
     }
 
-    private void run() {
+    protected void run()
+    {
         printTitle();
         Player player = new Player();
 
