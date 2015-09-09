@@ -22,11 +22,20 @@ public class BlackJackApplication
 
         application.printTitle();
         application.printHiddenCard();
+
+        CardController cardController = new CardController();
+        Card playerCard1 = cardController.generateCard(5, CardType.A);
+
+        printOpenCard(playerCard1);
     }
 
     private void printTitle()
     {
-        printString( title );
+        printString(title);
+    }
+
+    public static void printOpenCard(Card card) {
+        System.out.println(card.cardValue.toString() + card.cardType.toString());
     }
 
     private void printString( String string )

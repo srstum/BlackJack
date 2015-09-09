@@ -1,65 +1,63 @@
 package com.example;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.*;
 
-public class BlackJackApplicationTest
-{
+public class BlackJackApplicationTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     @Before
-    public void setUpStreams()
-    {
-        System.setOut( new PrintStream( outContent ) );
+    public void setUpStreams() {
+        System.setOut(new PrintStream(outContent));
     }
 
     @After
-    public void cleanUpStreams()
-    {
-        System.setOut( null );
+    public void cleanUpStreams() {
+        System.setOut(null);
     }
 
     @Test
-    public void PrintCustomTitle()
-        throws Exception
-    {
-        BlackJackApplication.main( new String[]{ "Test" } );
+    public void PrintCustomTitle() throws Exception {
+        BlackJackApplication.main(new String[] { "Test" });
 
-        assertThat( outContent.toString().trim() ).contains( "Test" );
+        assertThat(getConsoleText()).contains("Test");
+    }
+
+    private String getConsoleText() {
+        return outContent.toString().trim();
     }
 
     @Test
-    public void ShouldPrintDefaultTitle_WhenNoTitleProvided()
-        throws Exception
-    {
-        BlackJackApplication.main( new String[]{} );
+    public void ShouldPrintDefaultTitle_WhenNoTitleProvided() throws Exception {
+        BlackJackApplication.main(new String[] {});
 
-        assertThat( outContent.toString().trim() ).contains( "BlackJack" );
+        assertThat(getConsoleText()).contains("BlackJack");
     }
 
     @Test
-    public void ShouldPrintClosedCard()
-        throws Exception
-    {
-        BlackJackApplication application = new BlackJackApplication( "test" );
+    public void ShouldPrintClosedCard() throws Exception {
+        BlackJackApplication application = new BlackJackApplication("test");
 
         application.printHiddenCard();
 
-        assertThat( outContent.toString().trim() ).isEqualTo( "|*|" );
+        assertThat(getConsoleText()).isEqualTo("|*|");
     }
 
     @Test
-    public void ShouldRunApplicationAndPrintHiddenCard()
-        throws Exception
-    {
-        BlackJackApplication.main( new String[]{} );
+    public void ShouldRunApplicationAndPrintHiddenCard() throws Exception {
+        BlackJackApplication.main(new String[] {});
 
-        assertThat( outContent.toString().trim() ).isEqualTo( "BlackJack\n|*|" );
+        assertThat(getConsoleText()).contains("|*|");
+    }
+
+    @Test
+    public void testPrintOpenCard() {
+        Card card = new Card(5, CardType.A);
+        BlackJackApplication.printOpenCard(card);
+        assertThat(getConsoleText()).isEqualTo("5A");
     }
 }
