@@ -26,7 +26,7 @@ public class BlackJackApplicationTest
     }
 
     @Test
-    public void CanRunConsole()
+    public void PrintCustomTitle()
         throws Exception
     {
         BlackJackApplication.main( new String[]{ "Test" } );
@@ -35,11 +35,22 @@ public class BlackJackApplicationTest
     }
 
     @Test
-    public void DoNotFailIfNoArguments()
+    public void ShouldPrintDefaultTitle_WhenNoTitleProvided()
         throws Exception
     {
         BlackJackApplication.main( new String[]{} );
 
         assertThat( outContent.toString().trim() ).isEqualTo( "BlackJack" );
+    }
+
+    @Test
+    public void ShouldPrintClosedCard()
+        throws Exception
+    {
+        BlackJackApplication application = new BlackJackApplication();
+
+        application.printHiddenCard();
+
+        assertThat( outContent.toString().trim() ).isEqualTo( "*" );
     }
 }
