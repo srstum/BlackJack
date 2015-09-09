@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.player.Player;
 import com.sun.istack.internal.NotNull;
 
 public class BlackJackApplication {
@@ -17,17 +18,25 @@ public class BlackJackApplication {
 
         BlackJackApplication application = new BlackJackApplication(title);
 
-        CardController cardController = new CardController();
-        Card playerCard1 = cardController.generateCard(5, CardType.A);
-
-        application.run(playerCard1);
+        application.run();
 
     }
 
-    private void run(Card playerCard1) {
+    private void run() {
         printTitle();
+        Player player = new Player();
+
+        CardController cardController = new CardController();
+        Card playerCard1 = cardController.generateRandomCard();
+        Card playerCard2 = cardController.generateRandomCard();
+
+        player.addCard(playerCard1);
+        player.addCard(playerCard2);
+
         printHiddenCard();
+
         printOpenCard(playerCard1);
+        printOpenCard(playerCard2);
     }
 
     private void printTitle() {
