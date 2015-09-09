@@ -1,23 +1,37 @@
 package com.example;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BlackJackApplicationTest
 {
-    @Test
-    public void FirstRunningTest()
-        throws Exception
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
+    @Before
+    public void setUpStreams()
     {
-        assertThat( new BlackJackApplication() ).isNotNull();
+        System.setOut( new PrintStream( outContent ) );
+    }
+
+    @After
+    public void cleanUpStreams()
+    {
+        System.setOut( null );
     }
 
     @Test
     public void CanRunConsole()
         throws Exception
     {
-        BlackJackApplication.main( new String[]{ "BlackJack" } );
+        BlackJackApplication.main( new String[]{ "Test" } );
+
+        assertThat( outContent.toString().trim() ).isEqualTo( "Test" );
     }
 
     @Test
@@ -25,5 +39,7 @@ public class BlackJackApplicationTest
         throws Exception
     {
         BlackJackApplication.main( new String[]{} );
+
+        assertThat( outContent.toString().trim() ).isEqualTo( "BlackJack" );
     }
 }
