@@ -23,10 +23,6 @@ public class BlackJackApplication
 
         BlackJackApplication application = applicationFactory.createApplication( title );
 
-        CardController cardController = new CardController();
-        Card playerCard1 = cardController.generateCard( 5, CardType.A );
-        application.run();
-
         application.run();
 
     }
