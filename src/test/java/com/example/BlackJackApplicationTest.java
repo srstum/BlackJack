@@ -3,6 +3,7 @@ package com.example;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -10,6 +11,7 @@ import java.io.PrintStream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 public class BlackJackApplicationTest
 {
@@ -17,9 +19,17 @@ public class BlackJackApplicationTest
 
     private BlackJackApplication application = new BlackJackApplication( "test" );
 
+    @Mock
+    private BlackJackApplication.ApplicationFactory factoryMock;
+
+    @Mock
+    private BlackJackApplication applicationMock;
+
     @Before
-    public void setUpStreams()
+    public void setUp()
     {
+        initMocks( this );
+
         System.setOut( new PrintStream( outContent ) );
     }
 
@@ -27,60 +37,56 @@ public class BlackJackApplicationTest
     public void cleanUpStreams()
     {
         System.setOut( null );
-        BlackJackApplication.applicationFactory = new BlackJackApplication.ApplicationFactory();
     }
 
     @Test
     public void ShouldConstructApplication_WhenMainRun()
         throws Exception
     {
-        BlackJackApplication.applicationFactory = mock( BlackJackApplication.ApplicationFactory.class );
-        when( BlackJackApplication.applicationFactory.createApplication( anyString() ) ).thenReturn(
-            mock( BlackJackApplication.class ) );
+        BlackJackApplication.applicationFactory = factoryMock;
+        when( factoryMock.createApplication( anyString() ) ).thenReturn( applicationMock );
 
         BlackJackApplication.main( new String[]{} );
 
-        verify( BlackJackApplication.applicationFactory ).createApplication( "BlackJack" );
+        verify( factoryMock ).createApplication( "BlackJack" );
+    }
+
+    @Test
+    public void ShouldRunApplication_WhenMainRun()
+        throws Exception
+    {
+        BlackJackApplication.applicationFactory = factoryMock;
+        when( factoryMock.createApplication( anyString() ) ).thenReturn( applicationMock );
+
+        BlackJackApplication.main( new String[]{} );
+
+        verify( applicationMock ).run( any( Card.class ) );
     }
 
     @Test
     public void PrintCustomTitle()
         throws Exception
     {
-        BlackJackApplication.main( new String[]{ "Test" } );
+        application = new BlackJackApplication( "Test" );
+
+        application.run( new Card( 10, CardType.A ) );
 
         assertThat( getConsoleText() ).contains( "Test" );
     }
 
     private String getConsoleText()
     {
+        Reworked some tests
         return outContent.toString().trim();
-    }
-
-    @Test
-    public void ShouldPrintDefaultTitle_WhenNoTitleProvided()
-        throws Exception
-    {
-        BlackJackApplication.main( new String[]{} );
-
-        assertThat( getConsoleText() ).contains( "BlackJack" );
-    }
-
-    @Test
-    public void ShouldRunApplicationAndPrintHiddenCard()
-        throws Exception
-    {
-        BlackJackApplication.main( new String[]{} );
-
-        assertThat( getConsoleText() ).contains( "|*|" );
     }
 
     @Test
     public void testPrintOpenCard()
     {
-        BlackJackApplication application = new BlackJackApplication( "test" );
         Card card = new Card( 5, CardType.A );
+
         application.printOpenCard( card );
+
         assertThat( getConsoleText() ).isEqualTo( "5A" );
     }
 
@@ -88,8 +94,6 @@ public class BlackJackApplicationTest
     public void ShouldPrintClosedCard()
         throws Exception
     {
-        BlackJackApplication application = new BlackJackApplication( "test" );
-
         application.printHiddenCard();
 
         assertThat( getConsoleText() ).isEqualTo( "|*|" );
