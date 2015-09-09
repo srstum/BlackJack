@@ -47,7 +47,7 @@ public class BlackJackApplicationTest
     public void ShouldPrintClosedCard()
         throws Exception
     {
-        BlackJackApplication application = new BlackJackApplication();
+        BlackJackApplication application = new BlackJackApplication( "test" );
 
         application.printHiddenCard();
 
