@@ -2,51 +2,70 @@ package com.example;
 
 import com.sun.istack.internal.NotNull;
 
-public class BlackJackApplication {
+public class BlackJackApplication
+{
     public static final String DEFAULT_GAME_CAPTION = "BlackJack";
+
+    public static ApplicationFactory applicationFactory = new ApplicationFactory();
 
     @NotNull
     private final String title;
 
-    public BlackJackApplication(@NotNull String title) {
+    public BlackJackApplication( @NotNull String title )
+    {
         this.title = title;
     }
 
-    public static void main(String[] arguments) {
-        String title = getTitle(arguments);
+    public static void main( String[] arguments )
+    {
+        String title = getTitle( arguments );
 
-        BlackJackApplication application = new BlackJackApplication(title);
+        BlackJackApplication application = applicationFactory.createApplication( title );
 
         CardController cardController = new CardController();
-        Card playerCard1 = cardController.generateCard(5, CardType.A);
+        Card playerCard1 = cardController.generateCard( 5, CardType.A );
 
-        application.run(playerCard1);
+        application.run( playerCard1 );
 
     }
 
-    private void run(Card playerCard1) {
+    private void run( Card playerCard1 )
+    {
         printTitle();
         printHiddenCard();
-        printOpenCard(playerCard1);
+        printOpenCard( playerCard1 );
     }
 
-    private void printTitle() {
-        printString(title);
+    private void printTitle()
+    {
+        printString( title );
     }
 
-    private void printString(String string) {
-        System.out.println(string);
+    private void printString( String string )
+    {
+        System.out.println( string );
     }
 
-    private static String getTitle(String[] arguments) {
+    private static String getTitle( String[] arguments )
+    {
         return arguments.length > 0 ? arguments[0] : DEFAULT_GAME_CAPTION;
     }
 
-    public void printHiddenCard() {
-        System.out.println("|*|");
+    public void printHiddenCard()
+    {
+        System.out.println( "|*|" );
     }
 
-    public void printOpenCard(Card card) {
-        System.out.println(card.cardValue.toString() + card.cardType.toString());
+    public void printOpenCard( Card card )
+    {
+        System.out.println( card.cardValue.toString() + card.cardType.toString() );
+    }
+
+    public static class ApplicationFactory
+    {
+        public BlackJackApplication createApplication( String title )
+        {
+            return new BlackJackApplication( title );
+        }
     }
 }
