@@ -36,13 +36,13 @@ public class BlackJackApplication
         Card playerCard1 = cardController.generateRandomCard();
         Card playerCard2 = cardController.generateRandomCard();
 
-        player.addCard(playerCard1);
-        player.addCard(playerCard2);
+        player.addCard( playerCard1 );
+        player.addCard( playerCard2 );
 
         printHiddenCard();
 
-        printOpenCard(playerCard1);
-        printOpenCard(playerCard2);
+        printOpenCard( playerCard1 );
+        printOpenCard( playerCard2 );
     }
 
     private void printTitle()
@@ -67,7 +67,7 @@ public class BlackJackApplication
 
     public void printOpenCard( Card card )
     {
-        System.out.println( card.cardValue.toString() + card.cardType.toString() );
+        System.out.println( "|" + card.cardValue.toString() + card.cardType.toString() + "|" );
     }
 
     public static class ApplicationFactory

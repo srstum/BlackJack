@@ -87,7 +87,7 @@ public class BlackJackApplicationTest
 
         application.printOpenCard( card );
 
-        assertThat( getConsoleText() ).isEqualTo( "5A" );
+        assertThat( getConsoleText() ).isEqualTo( "|5A|" );
     }
 
     @Test
