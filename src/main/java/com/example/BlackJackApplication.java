@@ -39,8 +39,7 @@ public class BlackJackApplication {
 
         printHiddenCard();
 
-        printOpenCard(playerCard1);
-        printOpenCard(playerCard2);
+        printPlayer(player);
     }
 
     public void printPlayer(Player player) {
