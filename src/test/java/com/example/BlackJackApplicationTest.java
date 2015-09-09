@@ -39,15 +39,6 @@ public class BlackJackApplicationTest {
     }
 
     @Test
-    public void ShouldPrintClosedCard() throws Exception {
-        BlackJackApplication application = new BlackJackApplication("test");
-
-        application.printHiddenCard();
-
-        assertThat(getConsoleText()).isEqualTo("|*|");
-    }
-
-    @Test
     public void ShouldRunApplicationAndPrintHiddenCard() throws Exception {
         BlackJackApplication.main(new String[] {});
 
@@ -56,8 +47,18 @@ public class BlackJackApplicationTest {
 
     @Test
     public void testPrintOpenCard() {
+        BlackJackApplication application = new BlackJackApplication("test");
         Card card = new Card(5, CardType.A);
-        BlackJackApplication.printOpenCard(card);
+        application.printOpenCard(card);
         assertThat(getConsoleText()).isEqualTo("5A");
+    }
+
+    @Test
+    public void ShouldPrintClosedCard() throws Exception {
+        BlackJackApplication application = new BlackJackApplication("test");
+
+        application.printHiddenCard();
+
+        assertThat(getConsoleText()).isEqualTo("|*|");
     }
 }
