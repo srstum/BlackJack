@@ -1,0 +1,1 @@
+java -Duser.dir=build/classes/main com.example.BlackJackApplication
