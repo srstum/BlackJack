@@ -1,5 +1,8 @@
 package com.example;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
@@ -19,6 +22,13 @@ public class CardControllerTest
         Card generatedCard = cardController.generateCard( expectedCardValue, expectedCardType );
 
         assertEquals( expectedCardValue, generatedCard.cardValue );
-        assertEquals( expectedCardType, generatedCard.cardType );
+        assertEquals(expectedCardType, generatedCard.cardType);
+    }
+
+    @Test
+    public void testGenerateRandomCard() {
+        CardController cardController = new CardController();
+        Card card = cardController.generateRandomCard();
+        assertNotNull(card);
     }
 }
