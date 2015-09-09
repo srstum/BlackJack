@@ -1,20 +1,20 @@
 package com.example;
 
-import com.example.card.Card;
-import com.example.card.CardType;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mock;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import org.junit.*;
+import org.mockito.Mock;
+
+import com.example.card.Card;
+import com.example.card.CardType;
+import com.example.player.Player;
 
 public class BlackJackApplicationTest
 {
@@ -39,7 +39,7 @@ public class BlackJackApplicationTest
     @After
     public void cleanUpStreams()
     {
-        System.setOut( null );
+        System.setOut(null);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class BlackJackApplicationTest
 
         BlackJackApplication.main( new String[]{} );
 
-        verify( factoryMock ).createApplication( "BlackJack" );
+        verify(factoryMock).createApplication("BlackJack");
     }
 
     @Test
@@ -61,7 +61,7 @@ public class BlackJackApplicationTest
         BlackJackApplication.applicationFactory = factoryMock;
         when( factoryMock.createApplication( anyString() ) ).thenReturn( applicationMock );
 
-        BlackJackApplication.main( new String[]{} );
+        BlackJackApplication.main(new String[] {});
 
         verify( applicationMock ).run();
     }
@@ -74,7 +74,7 @@ public class BlackJackApplicationTest
 
         application.run();
 
-        assertThat( getConsoleText() ).contains( "Test" );
+        assertThat(getConsoleText()).contains("Test");
     }
 
     private String getConsoleText()

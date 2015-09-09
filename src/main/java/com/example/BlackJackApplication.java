@@ -26,7 +26,7 @@ public class BlackJackApplication {
 
     }
 
-    private void run() {
+    public void run() {
         printTitle();
         Player player = new Player();
 
@@ -68,7 +68,7 @@ public class BlackJackApplication {
     }
 
     public void printOpenCard(Card card) {
-        System.out.println(card.cardValue.toString() + card.cardType.toString());
+        System.out.println("|" + card.cardValue.toString() + card.cardType.toString() + "|");
     }
 
     public static class ApplicationFactory {
