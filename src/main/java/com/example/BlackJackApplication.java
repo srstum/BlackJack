@@ -6,9 +6,12 @@ public class BlackJackApplication
 
     public static void main( String[] arguments )
     {
+        BlackJackApplication application = new BlackJackApplication();
+
         String title = getTitle( arguments );
         print( title );
 
+        application.printHiddenCard();
     }
 
     private static void print( String title )
@@ -23,6 +26,6 @@ public class BlackJackApplication
 
     public void printHiddenCard()
     {
-        System.out.println( "*" );
+        System.out.println( "|*|" );
     }
 }

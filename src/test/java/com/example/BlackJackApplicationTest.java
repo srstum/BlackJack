@@ -31,7 +31,7 @@ public class BlackJackApplicationTest
     {
         BlackJackApplication.main( new String[]{ "Test" } );
 
-        assertThat( outContent.toString().trim() ).isEqualTo( "Test" );
+        assertThat( outContent.toString().trim() ).contains( "Test" );
     }
 
     @Test
@@ -40,7 +40,7 @@ public class BlackJackApplicationTest
     {
         BlackJackApplication.main( new String[]{} );
 
-        assertThat( outContent.toString().trim() ).isEqualTo( "BlackJack" );
+        assertThat( outContent.toString().trim() ).contains( "BlackJack" );
     }
 
     @Test
@@ -51,6 +51,15 @@ public class BlackJackApplicationTest
 
         application.printHiddenCard();
 
-        assertThat( outContent.toString().trim() ).isEqualTo( "*" );
+        assertThat( outContent.toString().trim() ).isEqualTo( "|*|" );
+    }
+
+    @Test
+    public void ShouldRunApplicationAndPrintHiddenCard()
+        throws Exception
+    {
+        BlackJackApplication.main( new String[]{} );
+
+        assertThat( outContent.toString().trim() ).isEqualTo( "BlackJack\n|*|" );
     }
 }
