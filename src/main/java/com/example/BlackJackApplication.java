@@ -39,7 +39,6 @@ public class BlackJackApplication
         player.addCard(playerCard2);
 
         printHiddenCard();
-        printOpenCard( playerCard1 );
 
         printOpenCard(playerCard1);
         printOpenCard(playerCard2);
