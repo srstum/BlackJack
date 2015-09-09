@@ -1,4 +1,4 @@
-package com.example;
+package com.example.card;
 
 import org.junit.Test;
 

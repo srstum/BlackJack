@@ -1,5 +1,7 @@
 package com.example;
 
+import com.example.card.Card;
+import com.example.card.CardController;
 import com.example.player.Player;
 import com.sun.istack.internal.NotNull;
 

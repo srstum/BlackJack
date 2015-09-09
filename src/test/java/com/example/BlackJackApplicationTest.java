@@ -1,5 +1,7 @@
 package com.example;
 
+import com.example.card.Card;
+import com.example.card.CardType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,15 +1,10 @@
-package com.example;
-
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
+package com.example.card;
 
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 
-/**
- * Created by 310154831 on 9-9-2015.
- */
 public class CardControllerTest
 {
     @Test
@@ -22,13 +17,14 @@ public class CardControllerTest
         Card generatedCard = cardController.generateCard( expectedCardValue, expectedCardType );
 
         assertEquals( expectedCardValue, generatedCard.cardValue );
-        assertEquals(expectedCardType, generatedCard.cardType);
+        assertEquals( expectedCardType, generatedCard.cardType );
     }
 
     @Test
-    public void testGenerateRandomCard() {
+    public void testGenerateRandomCard()
+    {
         CardController cardController = new CardController();
         Card card = cardController.generateRandomCard();
-        assertNotNull(card);
+        assertNotNull( card );
     }
 }

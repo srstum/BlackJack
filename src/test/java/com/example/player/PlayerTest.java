@@ -1,7 +1,7 @@
 package com.example.player;
 
-import com.example.Card;
-import com.example.CardType;
+import com.example.card.Card;
+import com.example.card.CardType;
 import org.junit.Test;
 
 import java.util.Collections;

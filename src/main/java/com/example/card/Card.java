@@ -1,10 +1,9 @@
-package com.example;
+package com.example.card;
 
 import java.util.Objects;
 
 public class Card
 {
-
     public Integer cardValue;
 
     public CardType cardType;
