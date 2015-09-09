@@ -2,10 +2,7 @@ package com.example;
 
 import org.junit.Test;
 
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.core.IsNull.nullValue;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BlackJackApplicationTest
 {
@@ -13,6 +10,6 @@ public class BlackJackApplicationTest
     public void FirstRunningTest()
         throws Exception
     {
-        assertThat( new BlackJackApplication(), is( not( nullValue() ) ) );
+        assertThat( new BlackJackApplication() ).isNotNull();
     }
 }
