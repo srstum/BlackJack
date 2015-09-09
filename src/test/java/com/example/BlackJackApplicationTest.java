@@ -12,4 +12,18 @@ public class BlackJackApplicationTest
     {
         assertThat( new BlackJackApplication() ).isNotNull();
     }
+
+    @Test
+    public void CanRunConsole()
+        throws Exception
+    {
+        BlackJackApplication.main( new String[]{ "BlackJack" } );
+    }
+
+    @Test
+    public void DoNotFailIfNoArguments()
+        throws Exception
+    {
+        BlackJackApplication.main( new String[]{} );
+    }
 }
