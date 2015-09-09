@@ -98,6 +98,19 @@ public class BlackJackApplicationTest
     {
         application.printHiddenCard();
 
-        assertThat( getConsoleText() ).isEqualTo( "|*|" );
+        assertThat(getConsoleText()).isEqualTo("|*|");
+    }
+
+    @Test
+    public void testPrintPlayer() {
+        BlackJackApplication application = new BlackJackApplication("test");
+        Card card1 = new Card(5, CardType.A);
+        Card card2 = new Card(10, CardType.C);
+        Player player = new Player();
+        player.addCard(card1);
+        player.addCard(card2);
+        application.printPlayer(player);
+
+        assertThat(getConsoleText()).isEqualTo("Player: 5A 10C");
     }
 }
